@@ -1,39 +1,42 @@
-import { Button } from "@/components/ui/button";
-import { BASE_URL, getHomePageData } from "@/lib/data";
-import { Metadata, ResolvingMetadata } from "next";
+import { HeroSection } from "@/components/custom/HeroSection";
+import { FeatureSection } from "@/components/custom/FeaturesSection";
+import { getHomePageData } from "@/lib/data";
+import { getStrapiMedia } from "@/lib/utils";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-export async function generateMetadata(
-	parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
 	// fetch data
-	const { data } = await getHomePageData();
-	const { title, description, image } = data.attributes;
-	const { url: imageUrl } = image.data.attributes;
-
-	// optionally access and extend (rather than replace) parent metadata
-	const previousImages = (await parent).openGraph?.images || [];
+	const data = await getHomePageData();
 
 	return {
-		title,
-		description,
+		title: data.title,
+		description: data.description,
 		openGraph: {
-			images: [BASE_URL + imageUrl, ...previousImages],
+			images: [getStrapiMedia(data?.image?.url) ?? ""],
 		},
 	};
 }
 
-export default async function Home() {
-	const { data } = await getHomePageData();
-	const { title, description, image } = data.attributes;
-	const { url: imageUrl } = image.data.attributes;
-
-	console.log({ title, description, imageUrl });
-
-	return (
-		<main>
-			<section>
-				<Button>Hello</Button>
-			</section>
-		</main>
-	);
+function blockRenderer(block: any) {
+	switch (block.__component) {
+		case "layout.hero-section":
+			return <HeroSection key={block.id} data={block} />;
+		case "layout.features-section":
+			return <FeatureSection key={block.id} data={block} />;
+		default:
+			return null;
+	}
 }
+
+const Home = async () => {
+	const data = await getHomePageData();
+
+	const { blocks } = data;
+
+	if (!blocks) return notFound();
+
+	return <main>{blocks?.map((block: any) => blockRenderer(block))}</main>;
+};
+
+export default Home;
