@@ -1,6 +1,5 @@
-import { BASE_URL } from "@/lib/data";
 import Link from "next/link";
-import StrapiImage from "./StrapiImage";
+import StrapiImage from "../custom/StrapiImage";
 
 type HeroSectionProps = {
 	id: number;
@@ -13,7 +12,7 @@ type HeroSectionProps = {
 
 export function HeroSection({ data }: { readonly data: HeroSectionProps }) {
 	return (
-		<header className="relative h-[600px] overflow-hidden">
+		<section className="relative h-[600px] overflow-hidden py-0 px-0">
 			<StrapiImage
 				alt={data.image.alternativeText ?? "Background"}
 				className="absolute inset-0 object-cover w-full h-full aspect/16:9"
@@ -33,6 +32,6 @@ export function HeroSection({ data }: { readonly data: HeroSectionProps }) {
 					{data.link?.text}
 				</Link>
 			</div>
-		</header>
+		</section>
 	);
 }

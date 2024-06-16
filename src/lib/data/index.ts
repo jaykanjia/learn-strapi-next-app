@@ -68,38 +68,51 @@ export const getHomePageData = async () => {
 };
 
 export const getGlobalData = async () => {
-	const homePageQuery = qs.stringify({
+	// const globalDataQuery = qs.stringify({
+	// 	populate: {
+	// 		header: {
+	// 			populate: {
+	// 				logoText: {
+	// 					populate: true,
+	// 				},
+	// 				ctaButton: {
+	// 					populate: true,
+	// 				},
+	// 			},
+	// 		},
+	// 		footer: {
+	// 			populate: {
+	// 				logoText: {
+	// 					populate: true,
+	// 				},
+	// 				socialLinks: {
+	// 					populate: true,
+	// 				},
+	// 			},
+	// 		},
+	// 	},
+	// });
+	const globalDataQuery = qs.stringify({
+		populate: [
+			"header.logoText",
+			"header.ctaButton",
+			"footer.logoText",
+			"footer.socialLinks",
+		],
+	});
+
+	return await fetchData("/api/global", globalDataQuery);
+};
+
+export const getGlobalMetaData = async () => {
+	const globalMetaDataQuery = qs.stringify({
 		populate: {
-			header: {
-				populate: {
-					logoText: {
-						populate: true,
-					},
-					ctaButton: {
-						populate: true,
-					},
-				},
-			},
-			footer: {
-				populate: {
-					logoText: {
-						populate: true,
-					},
-					socialLinks: {
-						populate: true,
-					},
-				},
+			image: {
+				fields: ["url", "alternativeText"],
 			},
 		},
+		fields: ["title", "description"],
 	});
-	// const homePageQuery = qs.stringify({
-	// 	populate: [
-	// 		"header.logoText",
-	// 		"header.ctaButton",
-	// 		"footer.logoText",
-	// 		"footer.socialLinks",
-	// 	],
-	// });
 
-	return await fetchData("/api/global", homePageQuery);
+	return await fetchData("/api/global", globalMetaDataQuery);
 };

@@ -1,5 +1,5 @@
-import { HeroSection } from "@/components/custom/HeroSection";
-import { FeatureSection } from "@/components/custom/FeaturesSection";
+import { HeroSection } from "@/components/layouts/HeroSection";
+import { FeatureSection } from "@/components/layouts/FeaturesSection";
 import { getHomePageData } from "@/lib/data";
 import { getStrapiMedia } from "@/lib/utils";
 import { Metadata } from "next";
