@@ -6,6 +6,10 @@ import GithubIcon from "./GithubIcon";
 import MountainIcon from "./MountainIcon";
 import TwitterIcon from "./TwitterIcon";
 import YoutubeIcon from "./YoutubeIcon";
+import DashboardIcon from "./DashboardIcon";
+import PieChartIcon from "./PieChartIcon";
+import UsersIcon from "./UsersIcon";
+import ViewIcon from "./ViewIcon";
 
 export {
 	BugIcon,
@@ -16,4 +20,8 @@ export {
 	MountainIcon,
 	TwitterIcon,
 	YoutubeIcon,
+	DashboardIcon,
+	PieChartIcon,
+	UsersIcon,
+	ViewIcon,
 };

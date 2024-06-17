@@ -1,5 +1,7 @@
 import Link from "next/link";
 import StrapiImage from "../custom/StrapiImage";
+import { getUserMe } from "@/lib/data/services/get-user-me";
+import LoggedInUser from "../custom/LoggedInUser";
 
 type HeroSectionProps = {
 	id: number;
@@ -10,7 +12,13 @@ type HeroSectionProps = {
 	link: LinkProps;
 };
 
-export function HeroSection({ data }: { readonly data: HeroSectionProps }) {
+export async function HeroSection({
+	data,
+}: {
+	readonly data: HeroSectionProps;
+}) {
+	const user = await getUserMe();
+
 	return (
 		<section className="relative h-[600px] overflow-hidden py-0 px-0">
 			<StrapiImage
@@ -27,9 +35,9 @@ export function HeroSection({ data }: { readonly data: HeroSectionProps }) {
 				<p className="mt-4 text-lg md:text-xl lg:text-2xl">{data.subHeading}</p>
 				<Link
 					className="mt-8 inline-flex items-center justify-center px-6 py-3 text-base font-medium text-black bg-white rounded-md shadow hover:bg-gray-100"
-					href={data.link?.url}
+					href={user.ok ? "/dashboard" : data.link?.url}
 				>
-					{data.link?.text}
+					{user.ok ? "Go To Dashboard" : data.link?.text}
 				</Link>
 			</div>
 		</section>
