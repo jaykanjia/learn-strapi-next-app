@@ -19,7 +19,7 @@ import { useFormState } from "react-dom";
 import { ZodErrors } from "../custom/ZodErrors";
 import { StrapiErrors } from "../custom/StrapiErrors";
 
-const INITIAL_STATE = {
+const initialState = {
 	zodErrors: null,
 	strapiErrors: null,
 	data: null,
@@ -29,7 +29,7 @@ const INITIAL_STATE = {
 export function SignupForm() {
 	const [formState, formAction] = useFormState(
 		registerUserAction,
-		INITIAL_STATE
+		initialState
 	);
 
 	return (

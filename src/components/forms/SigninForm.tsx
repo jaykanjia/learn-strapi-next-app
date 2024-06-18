@@ -20,7 +20,7 @@ import { loginUserAction } from "@/lib/data/actions/auth-actions";
 import { ZodErrors } from "@/components/custom/ZodErrors";
 import SubmitButton from "./SubmitButton";
 
-const INITIAL_STATE = {
+const initialState = {
 	zodErrors: null,
 	strapiErrors: null,
 	data: null,
@@ -28,7 +28,7 @@ const INITIAL_STATE = {
 };
 
 const SigninForm = () => {
-	const [formState, formAction] = useFormState(loginUserAction, INITIAL_STATE);
+	const [formState, formAction] = useFormState(loginUserAction, initialState);
 
 	return (
 		<div className="w-full max-w-md">

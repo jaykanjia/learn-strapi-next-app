@@ -28,7 +28,7 @@ function CountBox({ text }: { readonly text: number }) {
 	);
 }
 
-const INITIAL_DATA = {
+const initialState = {
 	message: null,
 	data: null,
 	strapiError: null,
@@ -43,7 +43,7 @@ const ProfileForm = ({
 }) => {
 	const updateUserWithId = updateUserProfileAction.bind(null, data.id);
 
-	const [formState, formAction] = useFormState(updateUserWithId, INITIAL_DATA);
+	const [formState, formAction] = useFormState(updateUserWithId, initialState);
 
 	return (
 		<form action={formAction} className={cn("space-y-4", className)}>
