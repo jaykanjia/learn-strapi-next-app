@@ -24,10 +24,10 @@ export const fetchData = async (path: string, query?: string) => {
 
 		const data = await response.json();
 		const flattenData = flattenAttributes(data);
-		console.dir(
-			{ path: path.replace(/\?.*/, ""), flattenData },
-			{ depth: null }
-		);
+		// console.dir(
+		// 	{ path: path.replace(/\?.*/, ""), flattenData },
+		// 	{ depth: null }
+		// );
 
 		return flattenData;
 	} catch (error) {

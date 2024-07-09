@@ -4,6 +4,7 @@ import "./globals.css";
 import { getGlobalData, getGlobalMetaData } from "@/lib/data";
 import Header from "@/components/custom/Header";
 import { Footer } from "@/components/custom/Footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +34,6 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }>) {
 	const globalData = await getGlobalData();
-	console.dir({ globalData }, { depth: null });
 
 	return (
 		<html lang="en">
@@ -41,6 +41,7 @@ export default async function RootLayout({
 				<Header data={globalData.header} />
 				{children}
 				<Footer data={globalData.footer} />
+				<Toaster position="bottom-center" />
 			</body>
 		</html>
 	);
